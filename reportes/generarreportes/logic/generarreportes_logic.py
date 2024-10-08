@@ -1,13 +1,15 @@
 from ..models import Curso, Estudiante, Cronograma, Pago
 
 
-def getPagados(cronogramaValor):
+def getPagados(cursoId):
     
-    pagados = Pago.objects.filter(cronograma__nombre = cronogramaValor, pagado = True ).all()
+    pagados = Pago.objects.filter(cronograma__curso__nombre = cursoId,  pagado = True ).all()
     return pagados
 
-def getPendientes(cronogramaValor):
+def getPendientes(cursoId):
 
-    pendientes = Pago.objects.filter(cronograma__nombre = cronogramaValor, pagado = False ).all()
+    pendientes = Pago.objects.filter(cronograma__curso__nombre = cursoId, pagado = False ).all()
     return pendientes
 
+def getCursos():
+    return Curso.objects.all()

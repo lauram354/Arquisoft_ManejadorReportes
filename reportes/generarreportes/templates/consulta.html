@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Consulta de Reportes de Estado de Cuenta</title>
+</head>
+<body>
+    <h2>Crear un nuevo pago</h2>
+    <form action="/consulta/estado/" method="POST">
+        <label>Institucion:</label>
+        <input type="int" name="institucionid" value="1" required /><br><br>
+        
+        <label>Curso:</label>
+        <input type="int" name="curso_id" value="1" required /><br><br>
+        
+        <button type="submit">Consultar Estado de Cuenta</button>
+    </form>
+</body>
+</html>
