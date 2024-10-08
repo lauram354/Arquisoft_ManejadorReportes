@@ -9,7 +9,7 @@ class Institucion(models.Model):
         return '{}'.format(self.nombre)
     
 class Estudiante(models.Model):
-    codigo = models.IntegerField
+    codigo = models.IntegerField(default=1)
     nombre = models.CharField(max_length=50)
     institucion = models.ForeignKey(Institucion, on_delete=models.CASCADE )
 
@@ -42,7 +42,7 @@ class ResponsableF(Usuario):
         return '{}'.format(self.nombre)
 
 class Cronograma(models.Model):
-    anio = models.IntegerField
+    anio = models.IntegerField(default=2024)
     nombre = models.CharField(max_length= 100)
     curso = models.OneToOneField(Curso, on_delete=models.CASCADE)
 
@@ -51,9 +51,9 @@ class Cronograma(models.Model):
 
 class Descuento(models.Model):
     nombre = models.CharField(max_length= 50)
-    porcentaje = models.FloatField
-    fechaInicio = models.DateField
-    fechaFinal = models.DateField
+    porcentaje = models.FloatField(default=0)
+    fechaInicio = models.DateField(default='2024-01-01')
+    fechaFinal = models.DateField(default='2024-01-01')
     fechaCreacion = models.DateField(auto_now = True)
 
     def __str__(self):
@@ -61,16 +61,16 @@ class Descuento(models.Model):
          
 class Pago(models.Model):
     nombre = models.CharField(max_length=50)
-    fecha = models.DateField
-    valor = models.FloatField
-    interes = models.FloatField
-    pagado = models.BooleanField
+    fecha = models.DateField(default='2024-01-01')
+    valor = models.FloatField(default=0)
+    interes = models.FloatField(default=0)
+    pagado = models.BooleanField(default=False)
     tipo = models.CharField(max_length=50)
-    periodicidad = models.IntegerField
+    periodicidad = models.IntegerField(default=0)
     estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
     responsableF = models.ForeignKey(ResponsableF, on_delete=models.CASCADE)
     cronograma = models.ForeignKey(Cronograma, on_delete=models.CASCADE)
-    descuento = models.ForeignKey(Descuento, on_delete=models.CASCADE)
+    descuento = models.ForeignKey(Descuento, on_delete=models.SET_NULL, null = True)
 
     def __str__(self):
         return '{}'.format(self.nombre)
@@ -90,8 +90,8 @@ class Recibo(models.Model):
     TIPORECIBO = [ (PAGO, 'pago'), (COBRO, 'cobro') ]
 
     nombre = models.CharField(max_length= 50)
-    fecha = models.DateField
-    valor = models.FloatField
+    fecha = models.DateField(default='2024-01-01')
+    valor = models.FloatField(default=0)
     medioPago = models.CharField(max_length= 50)
     tipo = models.IntegerField(choices=TIPORECIBO, default=PAGO)
     pago = models.OneToOneField(Pago, on_delete=models.CASCADE)

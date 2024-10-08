@@ -1,3 +1,91 @@
-from django.shortcuts import render
+from .logic import generarreportes_logic as gl
+from django.http import HttpResponse, JsonResponse
+from django.core import serializers
+import json
+from django.views.decorators.csrf import csrf_exempt
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+from reportlab.lib import colors
 
 # Create your views here.
+
+@csrf_exempt
+def generarreportes1_view(request):
+    if request.method == 'GET':
+        pagados = gl.getPagados('cronograma501')
+        pendientes = gl.getPendientes('cronograma501')
+        pagados_dto = serializers.serialize('json', pagados)
+        pendientes_dto = serializers.serialize('json', pendientes)
+
+        pagados_data = json.loads(pagados_dto)
+        pendientes_data = json.loads(pendientes_dto)
+        datos ={'pagados ': pagados_data, 'pendientes ': pendientes_data}
+        return JsonResponse(datos, safe=False)
+
+@csrf_exempt
+def generarreportes_view(request):
+    if request.method == 'GET':
+        pagados = gl.getPagados('cronograma501')
+        pendientes = gl.getPendientes('cronograma501')
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="estado_de_cuenta.pdf"'
+
+    pdf = canvas.Canvas(response, pagesize=A4)
+    pdf.setTitle("Reporte de Estado de Cuenta")
+    pdf.setFont("Times-Bold", 16)
+    pdf.drawString(100, 800, "Reporte de Estado de Cuenta")
+
+    pdf.setFont("Times-Bold", 14)
+    pdf.drawString(100, 780, "Pagos Pendientes:")
+    pdf.setFont("Times-Roman", 12)
+
+    y = 760 
+    totalpendiente = 0 
+    for pago in pendientes:
+        nombre = pago.nombre
+        fecha = pago.fecha
+        valor = pago.valor
+        tipo = pago.tipo
+        estudiante = pago.estudiante.nombre
+
+        pdf.drawString(100, y, f"Nombre: {nombre} Fecha: {fecha} Valor: {valor} Concepto: {tipo}  Estudiante: {estudiante}")
+        y -= 20  
+
+        if y < 100:  
+            pdf.showPage()
+            pdf.setFont("Times_Roman", 12)
+            y = 800
+        
+        totalpendiente += valor
+    pdf.setFont("Times-Bold", 12)
+    pdf.drawString(100, y, "Total Pendiente: " + str(totalpendiente))
+    y -= 20
+    pdf.setFont("Times-Bold", 14)
+    pdf.drawString(100, y, "Pagos Realizados:")
+    y -= 20
+    totalpagado = 0
+    for pago in pagados:
+        nombre = pago.nombre
+        fecha = pago.fecha
+        valor = pago.valor
+        tipo = pago.tipo
+        estudiante = pago.estudiante.nombre
+        
+        pdf.drawString(100, y, f"Nombre: {nombre} Fecha: {fecha} Valor: {valor} Concepto: {tipo} Estudiante: {estudiante}")
+        y -= 20  
+
+        if y < 100:  
+            pdf.showPage()
+            pdf.setFont("Times_Roman", 12)
+            y = 800
+
+        totalpagado += valor
+
+    pdf.setFont("Times-Bold", 12)
+    pdf.drawString(100, y, "Total Pagado: " + str(totalpagado))
+    y -= 20
+    pdf.showPage()
+    pdf.save()
+
+    return response
