@@ -36,7 +36,7 @@ class Curso(models.Model):
     def __str__(self):
         return '{}'.format(self.nombre)
 
-class ResponsableF(Usuario):
+class Responsablef(Usuario):
     estudiantes = models.ManyToManyField(Estudiante)
     def __str__(self):
         return '{}'.format(self.nombre)
@@ -68,7 +68,7 @@ class Pago(models.Model):
     tipo = models.CharField(max_length=50)
     periodicidad = models.IntegerField(default=0)
     estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
-    responsableF = models.ForeignKey(ResponsableF, on_delete=models.CASCADE)
+    responsableF = models.ForeignKey(Responsablef, on_delete=models.CASCADE)
     cronograma = models.ForeignKey(Cronograma, on_delete=models.CASCADE)
     descuento = models.ForeignKey(Descuento, on_delete=models.SET_NULL, null = True)
 

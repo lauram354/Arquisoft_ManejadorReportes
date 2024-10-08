@@ -10,19 +10,6 @@ from reportlab.lib import colors
 # Create your views here.
 
 @csrf_exempt
-def generarreportes1_view(request):
-    if request.method == 'GET':
-        pagados = gl.getPagados('cronograma501')
-        pendientes = gl.getPendientes('cronograma501')
-        pagados_dto = serializers.serialize('json', pagados)
-        pendientes_dto = serializers.serialize('json', pendientes)
-
-        pagados_data = json.loads(pagados_dto)
-        pendientes_data = json.loads(pendientes_dto)
-        datos ={'pagados ': pagados_data, 'pendientes ': pendientes_data}
-        return JsonResponse(datos, safe=False)
-
-@csrf_exempt
 def generarreportes_view(request):
     if request.method == 'GET':
         pagados = gl.getPagados('cronograma501')
