@@ -1,4 +1,4 @@
-from ..models import Curso, Estudiante, Cronograma, Pago
+from ..models import Curso, Estudiante, Cronograma, Pago, Reporte
 
 
 def getPagados(cursoId):
@@ -13,3 +13,9 @@ def getPendientes(cursoId):
 
 def getCursos():
     return Curso.objects.all()
+
+def crearReporte(nombre, tipo, fechaCreacion, ruta, pagos):
+    reporte = Reporte(nombre, tipo, fechaCreacion, ruta)
+    reporte.pago.add(pagos)
+    return reporte.save()
+    

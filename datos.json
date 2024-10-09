@@ -1,0 +1,124 @@
+[
+    {
+      "model": "generarreportes.institucion",
+      "pk": 1,
+      "fields": {
+        "nombre": "Institución ABC",
+        "logo": "https://example.com/logo.png",
+        "direccion": "Av. Siempre Viva 123"
+      }
+    },
+    {
+      "model": "generarreportes.estudiante",
+      "pk": 1,
+      "fields": {
+        "codigo": 1234,
+        "nombre": "Juan Pérez",
+        "institucion": 1
+      }
+    },
+    {
+      "model": "generarreportes.usuario",
+      "pk": 1,
+      "fields": {
+        "usuario": "jperez",
+        "correo": "juan.perez@example.com",
+        "nombre": "Juan Pérez",
+        "contrasenia": "12345",
+        "rol": "estudiante",
+        "institucion": 1
+      }
+    },
+    {
+      "model": "generarreportes.curso",
+      "pk": 1,
+      "fields": {
+        "nombre": "Matemáticas Básicas",
+        "institucion": 1,
+        "estudiantes": [1]
+      }
+    },
+    {
+      "model": "generarreportes.responsablef",
+      "pk": 1,
+      "fields": {
+        "usuario": "rmartinez",
+        "correo": "responsable@example.com",
+        "nombre": "Rodrigo Martínez",
+        "contrasenia": "54321",
+        "rol": "responsable",
+        "institucion": 1,
+        "estudiantes": [1]
+      }
+    },
+    {
+      "model": "generarreportes.cronograma",
+      "pk": 1,
+      "fields": {
+        "anio": 2024,
+        "nombre": "Cronograma Matemáticas 2024",
+        "curso": 1
+      }
+    },
+    {
+      "model": "generarreportes.descuento",
+      "pk": 1,
+      "fields": {
+        "nombre": "Descuento por pronto pago",
+        "porcentaje": 10,
+        "fechaInicio": "2024-01-01",
+        "fechaFinal": "2024-01-31",
+        "fechaCreacion": "2024-01-01"
+      }
+    },
+    {
+      "model": "generarreportes.pago",
+      "pk": 1,
+      "fields": {
+        "nombre": "Pago Enero",
+        "fecha": "2024-01-01",
+        "valor": 500.0,
+        "interes": 0.0,
+        "pagado": false,
+        "tipo": "Mensualidad",
+        "periodicidad": 1,
+        "estudiante": 1,
+        "responsableF": 1,
+        "cronograma": 1,
+        "descuento": 1
+      }
+    },
+    {
+      "model": "generarreportes.banco",
+      "pk": 1,
+      "fields": {
+        "nombre": "Banco Nacional",
+        "formato": "Formato de Pago",
+        "pago": 1
+      }
+    },
+    {
+      "model": "generarreportes.recibo",
+      "pk": 1,
+      "fields": {
+        "nombre": "Recibo de Pago Enero",
+        "fecha": "2024-01-01",
+        "valor": 450.0,
+        "medioPago": "Transferencia",
+        "tipo": 1,
+        "pago": 1
+      }
+    },
+    {
+      "model": "generarreportes.reporte",
+      "pk": 1,
+      "fields": {
+        "nombre": "Reporte de Pagos Enero",
+        "tipo": "Mensual",
+        "fechaCreacion": "2024-01-01",
+        "ruta": "/reportes/pagos_enero.pdf",
+        "pago": [1]
+      }
+    }
+  ]
+  
