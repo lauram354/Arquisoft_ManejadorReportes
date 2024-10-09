@@ -14,8 +14,8 @@ def getPendientes(cursoId):
 def getCursos():
     return Curso.objects.all()
 
-def crearReporte(nombre, tipo, fechaCreacion, ruta, pagos):
-    reporte = Reporte(nombre, tipo, fechaCreacion, ruta)
-    reporte.pago.add(pagos)
+def crearReporte(nombre, tipo, pagos):
+    ruta = '/Downloads'
+    reporte = Reporte(nombre, tipo, ruta, pagos)
     return reporte.save()
     

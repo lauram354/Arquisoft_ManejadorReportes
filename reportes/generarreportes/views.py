@@ -28,7 +28,9 @@ def generarreportes_view(request):
     if request.method == 'POST':
         data = request.POST
         cursoid =  Curso.objects.get(id=data['curso_id'])
-
+        nombre = "Reporte de Estado de Cuenta " + cursoid.nombre 
+        tipo = "Estado de Cuenta"
+        
         pagados = gl.getPagados(cursoid.nombre)
         pendientes = gl.getPendientes(cursoid)
 
@@ -42,11 +44,13 @@ def generarreportes_view(request):
 
         pdf.setFont("Times-Bold", 14)
         pdf.drawString(100, 780, "Pagos Pendientes:")
-        pdf.setFont("Times-Roman", 12)
+        pdf.setFont("Times-Roman", 10)
 
         y = 760 
         totalpendiente = 0 
+        pagos = []
         for pago in pendientes:
+            pagos.append(pago.id)
             nombre = pago.nombre
             fecha = pago.fecha
             valor = pago.valor
@@ -69,7 +73,9 @@ def generarreportes_view(request):
         pdf.drawString(100, y, "Pagos Realizados:")
         y -= 20
         totalpagado = 0
+        pdf.setFont("Times-Roman", 10)
         for pago in pagados:
+            pagos.append(pago.id)
             nombre = pago.nombre
             fecha = pago.fecha
             valor = pago.valor
@@ -91,5 +97,5 @@ def generarreportes_view(request):
         y -= 20
         pdf.showPage()
         pdf.save()
-
+        
         return response
