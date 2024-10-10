@@ -1,0 +1,1214 @@
+[
+    {
+      "model": "generarreportes.institucion",
+      "pk": 1,
+      "fields": {
+        "nombre": "Institución ABC",
+        "logo": "https://example.com/logo.png",
+        "direccion": "Av. Siempre Viva 123"
+      }
+    },
+    {
+      "model": "generarreportes.estudiante",
+      "pk": 1,
+      "fields": {
+        "codigo": 1234,
+        "nombre": "Juan Pérez",
+        "institucion": 1
+      }
+    },
+    {
+      "model": "generarreportes.usuario",
+      "pk": 1,
+      "fields": {
+        "usuario": "jperez",
+        "correo": "juan.perez@example.com",
+        "nombre": "Juan Pérez",
+        "contrasenia": "12345",
+        "rol": "estudiante",
+        "institucion": 1
+      }
+    },
+    {
+      "model": "generarreportes.curso",
+      "pk": 1,
+      "fields": {
+        "nombre": "Matemáticas Básicas",
+        "institucion": 1,
+        "estudiantes": [1]
+      }
+    },
+    {
+      "model": "generarreportes.responsablef",
+      "pk": 1,
+      "fields": {
+        "usuario": "rmartinez",
+        "correo": "responsable@example.com",
+        "nombre": "Rodrigo Martínez",
+        "contrasenia": "54321",
+        "rol": "responsable",
+        "institucion": 1,
+        "estudiantes": [1]
+      }
+    },
+    {
+      "model": "generarreportes.cronograma",
+      "pk": 1,
+      "fields": {
+        "anio": 2024,
+        "nombre": "Cronograma Matemáticas 2024",
+        "curso": 1
+      }
+    },
+    {
+      "model": "generarreportes.descuento",
+      "pk": 1,
+      "fields": {
+        "nombre": "Descuento por pronto pago",
+        "porcentaje": 10,
+        "fechaInicio": "2024-01-01",
+        "fechaFinal": "2024-01-31",
+        "fechaCreacion": "2024-01-01"
+      }
+    },
+    {
+      "model": "generarreportes.pago",
+      "pk": 1,
+      "fields": {
+        "nombre": "Pago Enero",
+        "fecha": "2024-01-01",
+        "valor": 500.0,
+        "interes": 0.0,
+        "pagado": false,
+        "tipo": "Mensualidad",
+        "periodicidad": 1,
+        "estudiante": 1,
+        "responsableF": 1,
+        "cronograma": 1,
+        "descuento": 1
+      }
+    },
+    {
+      "model": "generarreportes.banco",
+      "pk": 1,
+      "fields": {
+        "nombre": "Banco Nacional",
+        "formato": "Formato de Pago",
+        "pago": 1
+      }
+    },
+    {
+      "model": "generarreportes.recibo",
+      "pk": 1,
+      "fields": {
+        "nombre": "Recibo de Pago Enero",
+        "fecha": "2024-01-01",
+        "valor": 450.0,
+        "medioPago": "Transferencia",
+        "tipo": 1,
+        "pago": 1
+      }
+    },
+    {
+      "model": "generarreportes.reporte",
+      "pk": 1,
+      "fields": {
+        "nombre": "Reporte de Pagos Enero",
+        "tipo": "Mensual",
+        "fechaCreacion": "2024-01-01",
+        "ruta": "/reportes/pagos_enero.pdf",
+        "pago": [1]
+      }
+    }
+    ,
+      {
+        "model": "generarreportes.institucion",
+        "pk": 2,
+        "fields": {
+          "nombre": "Institución XYZ",
+          "logo": "https://example.com/logo2.png",
+          "direccion": "Calle Falsa 456"
+        }
+      },
+      {
+        "model": "generarreportes.institucion",
+        "pk": 3,
+        "fields": {
+          "nombre": "Institución DEF",
+          "logo": "https://example.com/logo3.png",
+          "direccion": "Av. Principal 789"
+        }
+      },
+      {
+        "model": "generarreportes.estudiante",
+        "pk": 2,
+        "fields": {
+          "codigo": 2234,
+          "nombre": "María López",
+          "institucion": 2
+        }
+      },
+      {
+        "model": "generarreportes.estudiante",
+        "pk": 3,
+        "fields": {
+          "codigo": 3234,
+          "nombre": "Carlos Fernández",
+          "institucion": 2
+        }
+      },
+      {
+        "model": "generarreportes.usuario",
+        "pk": 2,
+        "fields": {
+          "usuario": "mlopez",
+          "correo": "maria.lopez@example.com",
+          "nombre": "María López",
+          "contrasenia": "abcdef",
+          "rol": "estudiante",
+          "institucion": 2
+        }
+      },
+      {
+        "model": "generarreportes.usuario",
+        "pk": 3,
+        "fields": {
+          "usuario": "cfernandez",
+          "correo": "carlos.fernandez@example.com",
+          "nombre": "Carlos Fernández",
+          "contrasenia": "ghijkl",
+          "rol": "estudiante",
+          "institucion": 2
+        }
+      },
+      {
+        "model": "generarreportes.curso",
+        "pk": 2,
+        "fields": {
+          "nombre": "Ciencias Naturales",
+          "institucion": 2,
+          "estudiantes": [2, 3]
+        }
+      },
+      {
+        "model": "generarreportes.responsablef",
+        "pk": 2,
+        "fields": {
+          "usuario": "asanchez",
+          "correo": "andres.sanchez@example.com",
+          "nombre": "Andrés Sánchez",
+          "contrasenia": "mnopqr",
+          "rol": "responsable",
+          "institucion": 2,
+          "estudiantes": [2, 3]
+        }
+      },
+      {
+        "model": "generarreportes.cronograma",
+        "pk": 2,
+        "fields": {
+          "anio": 2024,
+          "nombre": "Cronograma Ciencias Naturales 2024",
+          "curso": 2
+        }
+      },
+      {
+        "model": "generarreportes.descuento",
+        "pk": 2,
+        "fields": {
+          "nombre": "Descuento por matrícula temprana",
+          "porcentaje": 15,
+          "fechaInicio": "2024-02-01",
+          "fechaFinal": "2024-02-15",
+          "fechaCreacion": "2024-01-10"
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 2,
+        "fields": {
+          "nombre": "Pago Febrero",
+          "fecha": "2024-02-01",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 2,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 2
+        }
+      },
+      {
+        "model": "generarreportes.banco",
+        "pk": 2,
+        "fields": {
+          "nombre": "Banco Internacional",
+          "formato": "Formato de Pago 2",
+          "pago": 2
+        }
+      },
+      {
+        "model": "generarreportes.recibo",
+        "pk": 2,
+        "fields": {
+          "nombre": "Recibo de Pago Febrero",
+          "fecha": "2024-02-01",
+          "valor": 510.0,
+          "medioPago": "Tarjeta de crédito",
+          "tipo": 1,
+          "pago": 2
+        }
+      },
+      {
+        "model": "generarreportes.reporte",
+        "pk": 2,
+        "fields": {
+          "nombre": "Reporte de Pagos Febrero",
+          "tipo": "Mensual",
+          "fechaCreacion": "2024-02-01",
+          "ruta": "/reportes/pagos_febrero.pdf",
+          "pago": [2]
+        }
+      },
+      {
+        "model": "generarreportes.institucion",
+        "pk": 4,
+        "fields": {
+          "nombre": "Institución GHI",
+          "logo": "https://example.com/logo4.png",
+          "direccion": "Calle Central 101"
+        }
+      },
+      {
+        "model": "generarreportes.estudiante",
+        "pk": 4,
+        "fields": {
+          "codigo": 4234,
+          "nombre": "Ana Gómez",
+          "institucion": 3
+        }
+      },
+      {
+        "model": "generarreportes.usuario",
+        "pk": 4,
+        "fields": {
+          "usuario": "agomez",
+          "correo": "ana.gomez@example.com",
+          "nombre": "Ana Gómez",
+          "contrasenia": "abcdef",
+          "rol": "estudiante",
+          "institucion": 3
+        }
+      },
+      {
+        "model": "generarreportes.curso",
+        "pk": 3,
+        "fields": {
+          "nombre": "Historia del Arte",
+          "institucion": 3,
+          "estudiantes": [4]
+        }
+      },
+      {
+        "model": "generarreportes.responsablef",
+        "pk": 3,
+        "fields": {
+          "usuario": "rgutierrez",
+          "correo": "roberto.gutierrez@example.com",
+          "nombre": "Roberto Gutiérrez",
+          "contrasenia": "uvwxyz",
+          "rol": "responsable",
+          "institucion": 3,
+          "estudiantes": [4]
+        }
+      },
+      {
+        "model": "generarreportes.cronograma",
+        "pk": 3,
+        "fields": {
+          "anio": 2024,
+          "nombre": "Cronograma Historia del Arte 2024",
+          "curso": 3
+        }
+      },
+      {
+        "model": "generarreportes.descuento",
+        "pk": 3,
+        "fields": {
+          "nombre": "Descuento por excelencia académica",
+          "porcentaje": 20,
+          "fechaInicio": "2024-03-01",
+          "fechaFinal": "2024-03-31",
+          "fechaCreacion": "2024-02-20"
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 3,
+        "fields": {
+          "nombre": "Pago Marzo",
+          "fecha": "2024-03-01",
+          "valor": 700.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 4,
+          "responsableF": 3,
+          "cronograma": 3,
+          "descuento": 3
+        }
+      },
+      {
+        "model": "generarreportes.banco",
+        "pk": 3,
+        "fields": {
+          "nombre": "Banco Financiero",
+          "formato": "Formato de Pago 3",
+          "pago": 3
+        }
+      },
+      {
+        "model": "generarreportes.recibo",
+        "pk": 3,
+        "fields": {
+          "nombre": "Recibo de Pago Marzo",
+          "fecha": "2024-03-01",
+          "valor": 560.0,
+          "medioPago": "Efectivo",
+          "tipo": 1,
+          "pago": 3
+        }
+      },
+      {
+        "model": "generarreportes.reporte",
+        "pk": 3,
+        "fields": {
+          "nombre": "Reporte de Pagos Marzo",
+          "tipo": "Mensual",
+          "fechaCreacion": "2024-03-01",
+          "ruta": "/reportes/pagos_marzo.pdf",
+          "pago": [3]
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 4,
+        "fields": {
+          "nombre": "Pago Abril",
+          "fecha": "2024-04-01",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 2,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 2
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 5,
+        "fields": {
+          "nombre": "Pago Mayo",
+          "fecha": "2024-05-01",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 3,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 2
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 6,
+        "fields": {
+          "nombre": "Pago Junio",
+          "fecha": "2024-06-01",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 2,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 2
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 7,
+        "fields": {
+          "nombre": "Pago Julio",
+          "fecha": "2024-07-01",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 3,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 2
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 8,
+        "fields": {
+          "nombre": "Pago Agosto",
+          "fecha": "2024-08-01",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 2,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 2
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 9,
+        "fields": {
+          "nombre": "Pago Septiembre",
+          "fecha": "2024-09-01",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 3,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 2
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 10,
+        "fields": {
+          "nombre": "Pago Octubre",
+          "fecha": "2024-10-01",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 2,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 2
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 11,
+        "fields": {
+          "nombre": "Pago Noviembre",
+          "fecha": "2024-11-01",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 3,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 2
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 12,
+        "fields": {
+          "nombre": "Pago Diciembre",
+          "fecha": "2024-12-01",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 2,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 2
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 13,
+        "fields": {
+          "nombre": "Pago Abril",
+          "fecha": "2024-04-01",
+          "valor": 650.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 4,
+          "responsableF": 3,
+          "cronograma": 3,
+          "descuento": 3
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 14,
+        "fields": {
+          "nombre": "Pago Mayo",
+          "fecha": "2024-05-01",
+          "valor": 650.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 4,
+          "responsableF": 3,
+          "cronograma": 3,
+          "descuento": 3
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 15,
+        "fields": {
+          "nombre": "Pago Junio",
+          "fecha": "2024-06-01",
+          "valor": 650.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 4,
+          "responsableF": 3,
+          "cronograma": 3,
+          "descuento": 3
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 16,
+        "fields": {
+          "nombre": "Pago Julio",
+          "fecha": "2024-07-01",
+          "valor": 650.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 4,
+          "responsableF": 3,
+          "cronograma": 3,
+          "descuento": 3
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 17,
+        "fields": {
+          "nombre": "Pago Agosto",
+          "fecha": "2024-08-01",
+          "valor": 650.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 4,
+          "responsableF": 3,
+          "cronograma": 3,
+          "descuento": 3
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 18,
+        "fields": {
+          "nombre": "Pago Septiembre",
+          "fecha": "2024-09-01",
+          "valor": 650.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 4,
+          "responsableF": 3,
+          "cronograma": 3,
+          "descuento": 3
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 19,
+        "fields": {
+          "nombre": "Pago Octubre",
+          "fecha": "2024-10-01",
+          "valor": 650.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 4,
+          "responsableF": 3,
+          "cronograma": 3,
+          "descuento": 3
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 20,
+        "fields": {
+          "nombre": "Pago Noviembre",
+          "fecha": "2024-11-01",
+          "valor": 650.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 4,
+          "responsableF": 3,
+          "cronograma": 3,
+          "descuento": 3
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 21,
+        "fields": {
+          "nombre": "Pago Diciembre",
+          "fecha": "2024-12-01",
+          "valor": 650.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 4,
+          "responsableF": 3,
+          "cronograma": 3,
+          "descuento": 3
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 22,
+        "fields": {
+          "nombre": "Pago Enero",
+          "fecha": "2024-01-15",
+          "valor": 550.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 2,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 1
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 23,
+        "fields": {
+          "nombre": "Pago Febrero",
+          "fecha": "2024-02-15",
+          "valor": 550.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 3,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 1
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 24,
+        "fields": {
+          "nombre": "Pago Marzo",
+          "fecha": "2024-03-15",
+          "valor": 550.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 2,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 1
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 25,
+        "fields": {
+          "nombre": "Pago Abril",
+          "fecha": "2024-04-15",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 3,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 1
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 26,
+        "fields": {
+          "nombre": "Pago Mayo",
+          "fecha": "2024-05-15",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 2,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 1
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 27,
+        "fields": {
+          "nombre": "Pago Junio",
+          "fecha": "2024-06-15",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 3,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 1
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 28,
+        "fields": {
+          "nombre": "Pago Julio",
+          "fecha": "2024-07-15",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 2,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 1
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 29,
+        "fields": {
+          "nombre": "Pago Agosto",
+          "fecha": "2024-08-15",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 3,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 1
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 30,
+        "fields": {
+          "nombre": "Pago Septiembre",
+          "fecha": "2024-09-15",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 2,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 1
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 31,
+        "fields": {
+          "nombre": "Pago Octubre",
+          "fecha": "2024-10-15",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 3,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 1
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 32,
+        "fields": {
+          "nombre": "Pago Noviembre",
+          "fecha": "2024-11-15",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 2,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 1
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 33,
+        "fields": {
+          "nombre": "Pago Diciembre",
+          "fecha": "2024-12-15",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 3,
+          "responsableF": 2,
+          "cronograma": 2,
+          "descuento": 1
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 34,
+        "fields": {
+          "nombre": "Pago Enero",
+          "fecha": "2024-01-10",
+          "valor": 550.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 4,
+          "responsableF": 3,
+          "cronograma": 3,
+          "descuento": 3
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 35,
+        "fields": {
+          "nombre": "Pago Febrero",
+          "fecha": "2024-02-10",
+          "valor": 550.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 4,
+          "responsableF": 3,
+          "cronograma": 3,
+          "descuento": 3
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 36,
+        "fields": {
+          "nombre": "Pago Marzo",
+          "fecha": "2024-03-10",
+          "valor": 550.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 4,
+          "responsableF": 3,
+          "cronograma": 3,
+          "descuento": 3
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 37,
+        "fields": {
+          "nombre": "Pago Abril",
+          "fecha": "2024-04-10",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 4,
+          "responsableF": 3,
+          "cronograma": 3,
+          "descuento": 3
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 38,
+        "fields": {
+          "nombre": "Pago Mayo",
+          "fecha": "2024-05-10",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 4,
+          "responsableF": 3,
+          "cronograma": 3,
+          "descuento": 3
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 39,
+        "fields": {
+          "nombre": "Pago Junio",
+          "fecha": "2024-06-10",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 4,
+          "responsableF": 3,
+          "cronograma": 3,
+          "descuento": 3
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 40,
+        "fields": {
+          "nombre": "Pago Julio",
+          "fecha": "2024-07-10",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 4,
+          "responsableF": 3,
+          "cronograma": 3,
+          "descuento": 3
+        }
+      }
+      ,
+      {
+        "model": "generarreportes.pago",
+        "pk": 41,
+        "fields": {
+          "nombre": "Pago Enero Curso 1",
+          "fecha": "2024-01-10",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 2,          
+          "responsableF": 2,       
+          "cronograma": 1,         
+          "descuento": 1           
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 42,
+        "fields": {
+          "nombre": "Pago Febrero Curso 1",
+          "fecha": "2024-02-10",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 3,          
+          "responsableF": 3,       
+          "cronograma": 1,         
+          "descuento": 1           
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 44,
+        "fields": {
+          "nombre": "Pago Abril Curso 1",
+          "fecha": "2024-04-10",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 2,          
+          "responsableF": 2,       
+          "cronograma": 1,         
+          "descuento": 1           
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 45,
+        "fields": {
+          "nombre": "Pago Mayo Curso 1",
+          "fecha": "2024-05-10",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 3,          
+          "responsableF": 3,       
+          "cronograma": 1,         
+          "descuento": 1           
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 47,
+        "fields": {
+          "nombre": "Pago Julio Curso 1",
+          "fecha": "2024-07-10",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 2,          
+          "responsableF": 2,       
+          "cronograma": 1,         
+          "descuento": 1           
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 48,
+        "fields": {
+          "nombre": "Pago Agosto Curso 1",
+          "fecha": "2024-08-10",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": true,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 3,          
+          "responsableF": 3,       
+          "cronograma": 1,         
+          "descuento": 1           
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 50,
+        "fields": {
+          "nombre": "Pago Octubre Curso 1",
+          "fecha": "2024-10-10",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 2,          
+          "responsableF": 2,       
+          "cronograma": 1,         
+          "descuento": 1           
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 51,
+        "fields": {
+          "nombre": "Pago Noviembre Curso 1",
+          "fecha": "2024-11-10",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 3,          
+          "responsableF": 3,       
+          "cronograma": 1,         
+          "descuento": 1           
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 49,
+        "fields": {
+          "nombre": "Pago Diciembre Curso 1",
+          "fecha": "2024-12-10",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 3,          
+          "responsableF": 3,       
+          "cronograma": 1,         
+          "descuento": 1           
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 46,
+        "fields": {
+          "nombre": "Pago Enero Curso 1",
+          "fecha": "2024-01-20",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 2,          
+          "responsableF": 2,       
+          "cronograma": 1,         
+          "descuento": 1           
+        }
+      },
+      {
+        "model": "generarreportes.pago",
+        "pk": 43,
+        "fields": {
+          "nombre": "Pago Febrero Curso 1",
+          "fecha": "2024-02-20",
+          "valor": 600.0,
+          "interes": 0.0,
+          "pagado": false,
+          "tipo": "Mensualidad",
+          "periodicidad": 1,
+          "estudiante": 3,          
+          "responsableF": 3,       
+          "cronograma": 1,         
+          "descuento": 1           
+        }
+      } 
+  ]
+  
