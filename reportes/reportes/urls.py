@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', views.home),
     path('consulta/', include('generarreportes.urls')),
+    path('health-check/', views.healthCheck),
     #path('consulta/', include('generarreportes.urls'))
 ]
