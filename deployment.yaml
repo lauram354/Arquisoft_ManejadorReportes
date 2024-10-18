@@ -5,7 +5,7 @@
 # Infraestructura para laboratorio de Circuit Breaker
 # Elementos a desplegar:
 # 1. Firewalls:
-#    - cbd-services-apps
+#    - cbd-services-ap
 #    - cbd-services-apps-web
 #    - cbd-circuit-breaker
 #    - cbd-circuit-breaker-admin
