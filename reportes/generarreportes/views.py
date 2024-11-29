@@ -1,7 +1,7 @@
 from .logic import generarreportes_logic as gl
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from .models import Pago, Cronograma, Curso, Institucion
+from .models import Pago, Cronograma, Curso, Institucion, Estudiante, Responsablef
 from django.core import serializers
 import json
 from django.views.decorators.csrf import csrf_exempt
@@ -99,3 +99,57 @@ def generarreportes_view(request):
         pdf.save()
         
         return response
+    
+
+@csrf_exempt
+def generarReportePago(request):
+    if request.method == 'POST':
+        estudiante_id = request.POST.get('estudiante_id', None)
+        responsable_id = request.POST.get('responsable_id', None)
+
+        # Filtrar pagos según el criterio proporcionado
+        if estudiante_id:
+            estudiante = Estudiante.objects.get(id=estudiante_id)
+            pagos = Pago.objects.filter(estudiante=estudiante)
+            titulo = f"Reporte de Pagos del Estudiante {estudiante.nombre}"
+        elif responsable_id:
+            responsable = Responsablef.objects.get(id=responsable_id)
+            pagos = Pago.objects.filter(responsableF=responsable)
+            titulo = f"Reporte de Pagos del Responsable Financiero {responsable.nombre}"
+        else:
+            return HttpResponse("Debes proporcionar un ID de estudiante o de responsable financiero.", status=400)
+
+        # Generar PDF
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = f'inline; filename="{titulo}.pdf"'
+
+        pdf = canvas.Canvas(response, pagesize=A4)
+        pdf.setTitle(titulo)
+        pdf.setFont("Times-Bold", 16)
+        pdf.drawString(100, 800, titulo)
+
+        y = 760
+        total = 0
+
+        pdf.setFont("Times-Bold", 14)
+        pdf.drawString(100, y, "Pagos Realizados:")
+        y -= 20
+
+        pdf.setFont("Times-Roman", 12)
+        for pago in pagos:
+            pdf.drawString(100, y, f"Nombre: {pago.nombre}, Fecha: {pago.fecha}, Valor: {pago.valor}, Concepto: {pago.tipo}")
+            y -= 20
+            total += pago.valor
+
+            if y < 100:  # Saltar de página si no hay espacio
+                pdf.showPage()
+                pdf.setFont("Times-Roman", 12)
+                y = 800
+
+        pdf.setFont("Times-Bold", 14)
+        pdf.drawString(100, y, f"Total Pagado: {total}")
+        pdf.save()
+
+        return response
+
+    return render(request, 'generar_reporte_pago.html')

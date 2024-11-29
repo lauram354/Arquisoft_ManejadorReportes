@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar Reporte de Pago</title>
+</head>
+<body>
+    <h1>Generar Reporte de Pagos</h1>
+    <h3>Filtre por ID estudiante o Id Responsable financiero</h3>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <label for="estudiante_id">ID del Estudiante:</label>
+        <input type="text" id="estudiante_id" name="estudiante_id"><br><br>
+
+        <label for="responsable_id">ID del Responsable Financiero:</label>
+        <input type="text" id="responsable_id" name="responsable_id"><br><br>
+
+        <button type="submit">Generar Reporte</button>
+    </form>
+    <!-- Botón para volver al Home -->
+    <button style="margin-top: 20px;" onclick="window.location.href='/home/'">Volver al Home</button>
+</body>
+</html>
