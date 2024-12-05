@@ -6,7 +6,11 @@
 </head>
 <body>
     <h2>Crear un nuevo reporte de estado de cuenta</h2>
-    <form action="/consulta/estado/" method="POST">
+    <form action="/facturacion/consulta/estado/" method="POST">
+        <label>Usuario:</label>
+        <input type="string" name="usuario" value="" required /><br><br>
+        <label>Contraseña:</label>
+        <input type="string" name="contrasenia" value="" required /><br><br>
         <label>Institucion:</label>
         <input type="int" name="institucionid" value="1" required /><br><br>
         

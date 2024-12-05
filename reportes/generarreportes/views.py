@@ -8,8 +8,9 @@ from django.views.decorators.csrf import csrf_exempt
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from reportlab.lib import colors
-
-
+import requests
+from rest_framework_simplejwt.tokens import AccessToken
+from rest_framework_simplejwt.exceptions import TokenError
 # Create your views here.
 
 @csrf_exempt
@@ -27,78 +28,103 @@ def generarreportes_view(request):
     
     if request.method == 'POST':
         data = request.POST
-        cursoid =  Curso.objects.get(id=data['curso_id'])
-        nombre = "Reporte de Estado de Cuenta " + cursoid.nombre 
-        tipo = "Estado de Cuenta"
-        
-        pagados = gl.getPagados(cursoid.nombre)
-        pendientes = gl.getPendientes(cursoid)
+        auth_url = 'http://34.42.191.236:8080/usuarios/api/token/'
+        payload = {
+            'username': data['usuario'],
+            'password': data['contrasenia'],
+        }
+        response = requests.post(auth_url, data=payload)
+        if response.status_code == 200:
+            response_data = response.json() 
+            print(response_data)
+            token_str = response_data['access']
+            try:
+                token = AccessToken(token_str)
+                institu = token['last_name']
 
-        response = HttpResponse(content_type='application/pdf')
-        response['Content-Disposition'] = 'inline; filename="estado_de_cuenta.pdf"'
+                institucion = Institucion.objects.get(id=data['institucionid'])
+                print(institucion)
+                print(institu)
+                if institucion.nombre == institu:
+                    cursoid =  Curso.objects.get(id=data['curso_id'])
+                    nombre = "Reporte de Estado de Cuenta " + cursoid.nombre 
+                    tipo = "Estado de Cuenta"
+                    
+                    pagados = gl.getPagados(cursoid.nombre)
+                    pendientes = gl.getPendientes(cursoid)
 
-        pdf = canvas.Canvas(response, pagesize=A4)
-        pdf.setTitle("Reporte de Estado de Cuenta")
-        pdf.setFont("Times-Bold", 16)
-        pdf.drawString(100, 800, "Reporte de Estado de Cuenta")
+                    response = HttpResponse(content_type='application/pdf')
+                    response['Content-Disposition'] = 'inline; filename="estado_de_cuenta.pdf"'
 
-        pdf.setFont("Times-Bold", 14)
-        pdf.drawString(100, 780, "Pagos Pendientes:")
-        pdf.setFont("Times-Roman", 10)
+                    pdf = canvas.Canvas(response, pagesize=A4)
+                    pdf.setTitle("Reporte de Estado de Cuenta")
+                    pdf.setFont("Times-Bold", 16)
+                    pdf.drawString(100, 800, "Reporte de Estado de Cuenta")
 
-        y = 760 
-        totalpendiente = 0 
-        pagos = []
-        for pago in pendientes:
-            pagos.append(pago.id)
-            nombre = pago.nombre
-            fecha = pago.fecha
-            valor = pago.valor
-            tipo = pago.tipo
-            estudiante = pago.estudiante.nombre
+                    pdf.setFont("Times-Bold", 14)
+                    pdf.drawString(100, 780, "Pagos Pendientes:")
+                    pdf.setFont("Times-Roman", 10)
 
-            pdf.drawString(100, y, f"Nombre: {nombre} Fecha: {fecha} Valor: {valor} Concepto: {tipo}  Estudiante: {estudiante}")
-            y -= 20  
+                    y = 760 
+                    totalpendiente = 0 
+                    pagos = []
+                    for pago in pendientes:
+                        pagos.append(pago.id)
+                        nombre = pago.nombre
+                        fecha = pago.fecha
+                        valor = pago.valor
+                        tipo = pago.tipo
+                        estudiante = pago.estudiante.nombre
 
-            if y < 100:  
-                pdf.showPage()
-                pdf.setFont("Times_Roman", 12)
-                y = 800
-            
-            totalpendiente += valor
-        pdf.setFont("Times-Bold", 12)
-        pdf.drawString(100, y, "Total Pendiente: " + str(totalpendiente))
-        y -= 20
-        pdf.setFont("Times-Bold", 14)
-        pdf.drawString(100, y, "Pagos Realizados:")
-        y -= 20
-        totalpagado = 0
-        pdf.setFont("Times-Roman", 10)
-        for pago in pagados:
-            pagos.append(pago.id)
-            nombre = pago.nombre
-            fecha = pago.fecha
-            valor = pago.valor
-            tipo = pago.tipo
-            estudiante = pago.estudiante.nombre
-            
-            pdf.drawString(100, y, f"Nombre: {nombre} Fecha: {fecha} Valor: {valor} Concepto: {tipo} Estudiante: {estudiante}")
-            y -= 20  
+                        pdf.drawString(100, y, f"Nombre: {nombre} Fecha: {fecha} Valor: {valor} Concepto: {tipo}  Estudiante: {estudiante}")
+                        y -= 20  
 
-            if y < 100:  
-                pdf.showPage()
-                pdf.setFont("Times_Roman", 12)
-                y = 800
+                        if y < 100:  
+                            pdf.showPage()
+                            pdf.setFont("Times_Roman", 12)
+                            y = 800
+                        
+                        totalpendiente += valor
+                    pdf.setFont("Times-Bold", 12)
+                    pdf.drawString(100, y, "Total Pendiente: " + str(totalpendiente))
+                    y -= 20
+                    pdf.setFont("Times-Bold", 14)
+                    pdf.drawString(100, y, "Pagos Realizados:")
+                    y -= 20
+                    totalpagado = 0
+                    pdf.setFont("Times-Roman", 10)
+                    for pago in pagados:
+                        pagos.append(pago.id)
+                        nombre = pago.nombre
+                        fecha = pago.fecha
+                        valor = pago.valor
+                        tipo = pago.tipo
+                        estudiante = pago.estudiante.nombre
+                        
+                        pdf.drawString(100, y, f"Nombre: {nombre} Fecha: {fecha} Valor: {valor} Concepto: {tipo} Estudiante: {estudiante}")
+                        y -= 20  
 
-            totalpagado += valor
+                        if y < 100:  
+                            pdf.showPage()
+                            pdf.setFont("Times_Roman", 12)
+                            y = 800
 
-        pdf.setFont("Times-Bold", 12)
-        pdf.drawString(100, y, "Total Pagado: " + str(totalpagado))
-        y -= 20
-        pdf.showPage()
-        pdf.save()
-        
-        return response
+                        totalpagado += valor
+
+                    pdf.setFont("Times-Bold", 12)
+                    pdf.drawString(100, y, "Total Pagado: " + str(totalpagado))
+                    y -= 20
+                    pdf.showPage()
+                    pdf.save()
+                    
+                    return response
+                else:
+                    return HttpResponse("Usuario no autorizado", status=400)
+            except TokenError as e:
+                print(f"Error al decodificar el token: {e}")
+                return HttpResponse("Error al decodificar el token", status=400)
+        else:
+            return HttpResponse("Error obteniendo los datos", status=400)
     
 
 @csrf_exempt
